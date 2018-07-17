@@ -63,7 +63,11 @@ $(document).ready(function() {
                     $("#error").fadeIn(1000, function() {
                         $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span></div>');
                         $("#btnUpdate").html('UPDATE');
+                          
                     });
+                    setTimeout(function() {
+                        $('#error').fadeOut('fast');
+                    }, 1000);
                 } else if (response == "profile-updated") {
                     $("#btnUpdate").html('<img src="images/ajax-loader.png" style="width:30px; height:30px;" />   Updating Profile ...');
                      $('#success').fadeIn('fast');

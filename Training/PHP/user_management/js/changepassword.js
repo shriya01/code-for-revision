@@ -23,7 +23,6 @@ $(document).ready(function() {
 
     function submitForm() {
         var data = $("#changepasswordform").serialize();
-        console.log(data);
         $.ajax({
             type: 'POST',
             url: 'validation.php',
@@ -34,13 +33,13 @@ $(document).ready(function() {
                 $("#btnChangePwd").html('<span class="glyphicon glyphicon-transfer"></span>please wait ...');
             },
             success: function(response) {
-                console.log(response);
-
                 if (response == "3") {
-                    $("#error").fadeIn(1000, function() {
-                        $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> your password is incorrect!</div>');
-                        $("#btnChangePwd").html('Login');
-                    });
+                    $("#btnChangePwd").html('Change Password');
+                    $("#error").show();
+                    $("#error").html('<div class="alert alert-danger">Password is incorrect</div>');
+                    setTimeout(function() {
+                        $('#error').fadeOut('slow');
+                    }, 5000);
                 } else if (response == "password-changed") {
                     $("#btnChangePwd").html('<img src="images/ajax-loader.png" style="width:30px; height:30px;" />  Changing Password ...');
                     $("#success").html('<div class="alert alert-success">Password Updated Successfully</div>');
@@ -48,8 +47,6 @@ $(document).ready(function() {
                     setTimeout(function() {
                         $('#success').fadeOut('fast');
                     }, 1000);
-                } else {
-                    console.log('response' + response);
                 }
             },
             error: function(xhr) {
@@ -58,5 +55,4 @@ $(document).ready(function() {
         });
         return false;
     }
-
 });
