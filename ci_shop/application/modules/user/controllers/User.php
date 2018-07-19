@@ -1,26 +1,26 @@
 <?php 
 /**
-*
-*/
+ *
+ */
 class User extends MX_Controller
 {
     /**
-    * Constructor Function
-    */
+     * Constructor Function
+     */
     public function __construct()
     {
-        $this->load->helper('url');
+        $this->load->helper(array('url','encryption'));
         //  $this->output->enable_profiler(TRUE);
         $this->load->library('session');
         $this->load->model('User_Model');
     }
 
     /**
-    * @DateOfCreation     1-July-2018
-    * @DateOfDeprecated
-    * @ShortDescription   This function checks the login credentials and after successful authentication redirects to home page
-    * @LongDescription
-    */
+     * @DateOfCreation     1-July-2018
+     * @DateOfDeprecated
+     * @ShortDescription   This function checks the login credentials and after successful authentication redirects to home page
+     * @LongDescription
+     */
     public function index()
     {
         if (isset($this->session->email)) {
@@ -59,25 +59,33 @@ class User extends MX_Controller
             }
         }
     }
+
     /**
-    * [home description]
-    * @return [type] [description]
-    */
+     * [home description]
+     * @return [type] [description]
+     */
     public function home()
     {
         if (!isset($this->session->email)) {
             redirect('user', 'refresh');
         } else {
             $data['title'] = "HOME";
-            $data['product_info'] = $this->User_Model->select(['product_id','name','description','price','selling_price'], 'product_info');
+            $data['product_info'] = $this->User_Model->select(['product_id','name','description','price','cover_image','selling_price'], 'product_info');
             $this->load->view('header', $data);
-            $this->load->view('home', $data);
+
+        $this->load->view('navigation');
+            $this->load->view('shop', $data);
             $this->load->view('footer');
         }
     }
+    /**
+     * [logout description]
+     * @return [type] [description]
+     */
     public function logout()
     {
         $this->session->sess_destroy();
         redirect('user');
     }
+    
 }

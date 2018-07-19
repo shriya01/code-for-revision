@@ -5,17 +5,16 @@
 	<meta name="description" content="">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
 	<!-- Title  -->
-	<title><?php echo isset($title) ? $title : 'Essence - Fashion Ecommerce Template'; ?></title>
-
+	<title><?php echo isset($title) ? $title : 'Shop'; ?></title>
 	<!-- Favicon  -->
 	<link rel="icon" href="img/core-img/favicon.ico">
-
-	<!-- Core Style CSS -->
-	<link rel="stylesheet" href="<?php echo base_url('assets/user/css/core-style.css'); ?>">
-	<link rel="stylesheet" href="style.css">
-
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/user/css/style.css');?>">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<script type="text/javascript">
+    var BASE_URL = "<?php echo base_url();?>";
+</script>
 </head>
 <body>

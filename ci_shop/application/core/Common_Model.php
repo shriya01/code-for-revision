@@ -84,4 +84,23 @@ class Common_model extends CI_Model
             }
         }
     }
+/**
+ * [get_joins description]
+ * @param  [type] $table   [description]
+ * @param  [type] $columns [description]
+ * @param  [type] $joins   [description]
+ * @return [type]          [description]
+ */
+    public function get_joins($table, $columns, $joins)
+{
+    $this->db->select($columns)->from($table);
+    if (is_array($joins) && count($joins) > 0)
+    {
+        foreach($joins as $k => $v)
+        {
+            $this->db->join($v['table'], $v['condition'], $v['jointype']);
+        }
+    }
+    return $this->db->get()->result_array();
+}
 }

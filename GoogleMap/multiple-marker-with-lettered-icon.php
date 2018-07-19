@@ -23,14 +23,20 @@
 	var infowindow;
 	var service;
 	var markersArray = [];
+	//Specifying options 
 	var options = ['bank', 'gas_station', 'post_office', 'library', 'police', 'hospital', 'museum', 'movie_theater', 'train_station', 'place_of_worship', 'school', 'grocery_or_supermarket', 'restaurant', 'shopping_center', 'department_store', 'home_goods_store', 'park'];
-	//lettered icon for differentiation between marks
+	/**
+	 * lettered icon for differentiation between marks
+	 * @param  {[string]} letter [description]
+	 * @return {[url]}        [description]
+	 */
 	function getLetteredIcon(letter)
 	{
 		return "http://www.google.com/mapfiles/marker" + letter + ".png";;
 	} 
-
-	/**/
+	/**
+	 * This Function initialize the google map and set it to container with id map 
+	 */
 	function initialize()
 	{
 		var center = new google.maps.LatLng(22.7195687,75.85772580000003);
@@ -51,8 +57,6 @@
 			document.getElementById('options').innerHTML+='<input type="checkbox" id="'+options[i]+'" onclick="performSearch();" ><img src='+getLetteredIcon(String.fromCharCode('A'.charCodeAt(0) + i)) +' height="20" /> ' + options[i] + '<br>';
 
 		}
-		
-
 	}
 	function performSearch() {
 			clearMaps();

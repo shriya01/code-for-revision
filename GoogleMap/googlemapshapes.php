@@ -19,12 +19,14 @@
     <script type="text/javascript">
         function initMap()
         {
+            //Initialise the map variable and assign properties to google map object
             var map = new google.maps.Map(document.getElementById('map'),
             {
                 center:{lat: 22.397, lng: 75.644},
                 zoom:8,
                 mapTypeId:google.maps.MapTypeId.ROADMAP
             });
+            //Initialise the drawingManager variable and assign properties to google map drawing library object
             var drawingManager = new google.maps.drawing.DrawingManager(
             {
                 drawingMode: google.maps.drawing.OverlayType.MARKER,
@@ -32,21 +34,21 @@
                 drawingControlOptions:{
                     position: google.maps.ControlPosition.TOP_LEFT,
                     drawingModes: ['marker','rectangle','polygon','circle','polyline']
-
                 }
             });
+            //set map on drawing library object
             drawingManager.setMap(map);
+            //add event when polygon is complete
             google.maps.event.addListener(drawingManager, 'polygoncomplete', function (polygon) {
                 var polygoncoordinates = (polygon.getPath().getArray());
                 polygonArea = google.maps.geometry.spherical.computeArea(polygon.getPath());
                 document.getElementById('polygoncoordinates').innerHTML+=polygoncoordinates;
                 document.getElementById('polygonArea').innerHTML += polygonArea+"  <br />";
-
             });
+            //add event when reactangle is complete
             google.maps.event.addListener(drawingManager, 'rectanglecomplete', function (rectangle) {
                 var rectanglecoordinates = (rectangle.getBounds());
                 var area= rectArea(rectanglecoordinates);
-
                 function rectArea(bounds){
                     var sw = bounds.getSouthWest();
                     var ne = bounds.getNorthEast();
@@ -60,12 +62,12 @@
                 }  
                 document.getElementById('rectanglecoordinates').innerHTML += rectanglecoordinates;
             });
-
+            //add event when polyline is complete
             google.maps.event.addListener(drawingManager, 'polylinecomplete', function(polyline) {
                 var polylinecoordinates = (polyline.getPath().getArray());
                 document.getElementById('polylinecoordinates').innerHTML += polylinecoordinates;
             });
-
+            //add event when circle is complete
             google.maps.event.addListener(drawingManager, 'circlecomplete', function(circle) {
                 var circlecenter = (circle.getCenter());
                 var radius=(circle.getRadius());
